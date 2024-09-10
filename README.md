@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @anasFlah
 - 👀 I’m interested in VueJs,VueX
-- 🌱 I’m currently learning PhP and KendoUI
+- 🌱 I’m currently learning web3
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me https://www.linkedin.com/in/anes-flah/
 
