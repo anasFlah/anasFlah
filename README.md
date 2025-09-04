@@ -6,7 +6,7 @@
 
 🚀 About Me
 
-🎓 3+ years of experience in digital agencies & B2C projects
+🎓 5+ years of experience in digital agencies & B2C projects
 
 🌐 Specialized in WordPress, WooCommerce, PrestaShop, and CodeIgniter
 
