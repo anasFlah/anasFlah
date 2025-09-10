@@ -1,0 +1,404 @@
+.analyticsOverview {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        gap: 2rem;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            background: linear-gradient(135deg, #E0E0E0, #C0C0C0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.2;
+
+            @media (max-width: 1024px) {
+                font-size: 1.75rem;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 1.5rem;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 1.25rem;
+            }
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.4;
+            max-width: 100%;
+
+            @media (max-width: 768px) {
+                font-size: 0.9rem;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 0.85rem;
+            }
+        }
+
+        .controls {
+            .timeRange {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #ffffff;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.15);
+                    border-color: rgba(255, 255, 255, 0.3);
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: #E0E0E0;
+                    box-shadow: 0 0 0 2px rgba(224, 224, 224, 0.2);
+                }
+            }
+        }
+    }
+
+    .metricsGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    .metricCard {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .metricHeader {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+            .iconContainer {
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+            }
+
+            .metricInfo {
+                flex: 1;
+
+                .title {
+                    display: block;
+                    font-size: 0.9rem;
+                    color: rgba(255, 255, 255, 0.7);
+                    margin-bottom: 0.25rem;
+                }
+
+                .change {
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 6px;
+                    display: inline-block;
+
+                    &.positive {
+                        background: rgba(224, 224, 224, 0.2);
+                        color: #E0E0E0;
+                    }
+
+                    &.negative {
+                        background: rgba(255, 107, 107, 0.2);
+                        color: #ff6b6b;
+                    }
+                }
+            }
+        }
+
+        .metricValue {
+            .value {
+                font-size: 2rem;
+                font-weight: 700;
+                color: #ffffff;
+                line-height: 1;
+            }
+        }
+    }
+
+    .chartsSection {
+        margin-bottom: 2rem;
+
+        .chartRow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+
+            @media (max-width: 1024px) {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .chartCard {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+
+            h3 {
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin: 0 0 1.5rem 0;
+                color: #ffffff;
+            }
+
+            .chartLegend {
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                margin-top: 1rem;
+
+                .legendItem {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    font-size: 0.9rem;
+                    color: rgba(255, 255, 255, 0.8);
+
+                    .legendDot {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            .countriesList {
+                .countryItem {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 1rem;
+                    padding: 0.75rem;
+                    background: rgba(255, 255, 255, 0.03);
+                    border-radius: 8px;
+
+                    .countryInfo {
+                        flex: 1;
+                        min-width: 0;
+
+                        .countryName {
+                            display: block;
+                            font-weight: 500;
+                            color: #ffffff;
+                            margin-bottom: 0.25rem;
+                        }
+
+                        .countrySessions {
+                            font-size: 0.8rem;
+                            color: rgba(255, 255, 255, 0.6);
+                        }
+                    }
+
+                    .progressBar {
+                        flex: 1;
+                        height: 8px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 4px;
+                        overflow: hidden;
+                        margin: 0 1rem;
+
+                        .progress {
+                            height: 100%;
+                            border-radius: 4px;
+                            transition: width 0.3s ease;
+                        }
+                    }
+
+                    .percentage {
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        color: #ffffff;
+                        min-width: 40px;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+
+    .topPages {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        backdrop-filter: blur(10px);
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: #ffffff;
+        }
+
+        .pagesList {
+            .pageItem {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1rem;
+                padding: 0.75rem;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 8px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .pageInfo {
+                    flex: 1;
+                    min-width: 0;
+
+                    .pageName {
+                        display: block;
+                        font-weight: 500;
+                        color: #ffffff;
+                        margin-bottom: 0.25rem;
+                    }
+
+                    .pageViews {
+                        font-size: 0.8rem;
+                        color: rgba(255, 255, 255, 0.6);
+                    }
+                }
+
+                .progressBar {
+                    flex: 1;
+                    height: 8px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 0 1rem;
+
+                    .progress {
+                        height: 100%;
+                        border-radius: 4px;
+                        transition: width 0.3s ease;
+                    }
+                }
+
+                .percentage {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #ffffff;
+                    min-width: 40px;
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+        text-align: center;
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(224, 224, 224, 0.3);
+            border-top: 3px solid #E0E0E0;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+    }
+
+    .error {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+        text-align: center;
+
+        p {
+            color: #ff6b6b;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .retryBtn {
+            background: rgba(224, 224, 224, 0.2);
+            border: 1px solid #E0E0E0;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+
+            &:hover {
+                background: #E0E0E0;
+                transform: translateY(-2px);
+            }
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

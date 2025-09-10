@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: umami-postgres
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: umami
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    container_name: umami-app
+    environment:
+      DATABASE_URL: postgresql://umami:umami@postgres:5432/umami
+      DATABASE_TYPE: postgresql
+      HASH_SALT: your-hash-salt-here-change-this
+      JWT_SECRET: api_CbFyaOsYRdHHxgCzrUjFOUqf4d5Kf4g5
+      APP_SECRET: your-app-secret-here-change-this
+      # Umami v2+ required environment variables
+      NEXT_PUBLIC_APP_URL: http://localhost:3001
+      NEXT_PUBLIC_APP_NAME: "Portfolio Analytics"
+      NEXT_PUBLIC_APP_DESCRIPTION: "Analytics for Portfolio Website"
+      NEXT_PUBLIC_APP_LOGO: "/logo.svg"
+      NEXT_PUBLIC_APP_ICON: "/icon.svg"
+      # Database connection settings
+      DATABASE_SSL: "false"
+      DATABASE_LOGGING: "false"
+      # Security settings
+      ENABLE_ANONYMOUS_USERS: "true"
+      ENABLE_REGISTRATION: "false"
+      # Performance settings
+      CLICKHOUSE_SERVER_URL: ""
+      CLICKHOUSE_DATABASE: ""
+      CLICKHOUSE_USERNAME: ""
+      CLICKHOUSE_PASSWORD: ""
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    # Initialize Umami database on first run
+    command: >
+      sh -c "
+        echo 'Waiting for database to be ready...' &&
+        sleep 10 &&
+        echo 'Running Umami database migrations...' &&
+        npx umami db migrate &&
+        echo 'Starting Umami application...' &&
+        npm start
+      "
+
+volumes:
+  postgres_data:

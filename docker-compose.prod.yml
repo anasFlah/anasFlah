@@ -1,0 +1,138 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database for Umami Analytics
+  postgres:
+    image: postgres:15-alpine
+    container_name: umami-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-umami}
+      POSTGRES_USER: ${POSTGRES_USER:-umami}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-umami}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Umami Analytics
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    container_name: umami-app
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-umami}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-umami}
+      DATABASE_TYPE: postgresql
+      HASH_SALT: ${UMAMI_HASH_SALT}
+      JWT_SECRET: ${UMAMI_JWT_SECRET}
+      APP_SECRET: ${UMAMI_APP_SECRET}
+      # Umami v2+ required environment variables
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_UMAMI_BASE_URL}
+      NEXT_PUBLIC_APP_NAME: "Portfolio Analytics"
+      NEXT_PUBLIC_APP_DESCRIPTION: "Analytics for Portfolio Website"
+      NEXT_PUBLIC_APP_LOGO: "/logo.svg"
+      NEXT_PUBLIC_APP_ICON: "/icon.svg"
+      # Database connection settings
+      DATABASE_SSL: "false"
+      DATABASE_LOGGING: "false"
+      # Security settings
+      ENABLE_ANONYMOUS_USERS: "true"
+      ENABLE_REGISTRATION: "false"
+      # Performance settings
+      CLICKHOUSE_SERVER_URL: ""
+      CLICKHOUSE_DATABASE: ""
+      CLICKHOUSE_USERNAME: ""
+      CLICKHOUSE_PASSWORD: ""
+    ports:
+      - "3001:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # Initialize Umami database on first run
+    command: >
+      sh -c "
+        echo 'Waiting for database to be ready...' &&
+        sleep 10 &&
+        echo 'Running Umami database migrations...' &&
+        npx umami db migrate &&
+        echo 'Starting Umami application...' &&
+        npm start
+      "
+
+  # Next.js Portfolio Application
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-app
+    environment:
+      NODE_ENV: production
+      # Admin Authentication
+      ADMIN_USERNAME: ${ADMIN_USERNAME}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH}
+      JWT_SECRET: ${JWT_SECRET}
+      # Umami Analytics Configuration
+      NEXT_PUBLIC_UMAMI_BASE_URL: ${NEXT_PUBLIC_UMAMI_BASE_URL}
+      NEXT_PUBLIC_UMAMI_USERNAME: ${NEXT_PUBLIC_UMAMI_USERNAME}
+      NEXT_PUBLIC_UMAMI_PASSWORD: ${NEXT_PUBLIC_UMAMI_PASSWORD}
+      NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+      NEXT_PUBLIC_UMAMI_API_URL: ${NEXT_PUBLIC_UMAMI_API_URL}
+      NEXT_PUBLIC_UMAMI_TRACKING_SCRIPT_URL: ${NEXT_PUBLIC_UMAMI_TRACKING_SCRIPT_URL}
+      # Security
+      NEXT_PUBLIC_ENABLE_SECURITY_HEADERS: ${NEXT_PUBLIC_ENABLE_SECURITY_HEADERS:-true}
+    ports:
+      - "3000:3000"
+    depends_on:
+      umami:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - portfolio
+      - umami
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:80 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
