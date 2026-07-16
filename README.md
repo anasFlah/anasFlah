@@ -1,52 +1,106 @@
+# 👋 Hi, I'm Anes Flah
 
-👋 Hi, I’m @anasFlah
+### Founder of DreamLayers • Full-Stack Developer • SaaS Builder
 
-💻 Web Developer | E-commerce Specialist | WordPress & PHP Expert
-🎯 Passionate about building high-performance websites & scalable digital solutions
+I help startups and businesses transform ideas into scalable digital products.
 
-🚀 About Me
+As the founder of **DreamLayers**, I build modern web applications, SaaS platforms, AI-powered solutions, and high-converting websites—from strategy and design to deployment and growth.
 
-🎓 5+ years of experience in digital agencies & B2C projects
+---
 
-🌐 Specialized in WordPress, WooCommerce, PrestaShop, and CodeIgniter
+## 🚀 About Me
 
-📈 Skilled in website optimization, SEO, and performance tuning
+🏢 Founder of DreamLayers Digital Agency
 
-🛠️ Focused on creating ergonomic, responsive, and user-friendly UIs
+💻 Full-stack developer focused on SaaS & web platforms
 
-🤝 Open to freelance projects and collaborations
+🤖 Building AI-powered business tools & automations
 
-🧰 Tech Stack
+⚡ Passionate about clean architecture, performance, and UX
 
-Frontend: HTML5, CSS3, JavaScript, React, TailwindCSS, Bootstrap
+🌍 Working with startups, agencies, and growing businesses worldwide
 
-Backend: PHP (Native & CodeIgniter), MySQL
+---
 
-CMS & E-Commerce: WordPress, WooCommerce, PrestaShop
+## 🏗 What I Build
 
-Tools & Workflow: Git, GitHub, Cursor, Figma, Elementor
+- SaaS Platforms
+- ERP & CRM Systems
+- AI Integrations
+- Automation Tools
+- E-commerce Platforms
+- Custom Business Software
+- WordPress & Headless CMS
+- REST APIs
+- Admin Dashboards
 
-📂 Highlight Projects
+---
 
-🔹 Go-Makkah – Optimized travel website with multi-language & speed tuning
+## ⚙ Tech Stack
 
-🔹 E-Commerce Solutions – Developed scalable online stores with custom features
+### Frontend
+React • Next.js • TypeScript • JavaScript • Tailwind CSS
 
-🔹 Custom Admin Dashboards – Built responsive dashboards with analytics & UI/UX focus
+### Backend
+Node.js • Express • PHP • CodeIgniter
 
-📊 GitHub Stats
+### Database
+PostgreSQL • MySQL • Prisma
 
-📫 Connect with Me
+### AI & APIs
+OpenAI • Claude • Webhooks • REST APIs
 
-🌍 Portfolio: anesflah.com
+### DevOps
+Docker • Nginx • Linux • GitHub Actions • VPS
 
-💼 LinkedIn: https://www.linkedin.com/in/anes-flah/
+### CMS
+WordPress • WooCommerce • PrestaShop
 
-✉️ Email: anes.ben.flah@gmail.com
+---
 
+## 🚀 Featured Projects
 
+### 🟢 Strasync ERP
+Business management platform for SMEs.
 
-<!---
-anasFlah/anasFlah is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+### 💬 WhatsApp Team Platform
+Multi-agent communication platform.
+
+### 🌍 DreamLayers
+Digital agency building websites, SaaS products, and business solutions.
+
+### 🛍 E-commerce Solutions
+Custom WooCommerce & PrestaShop projects.
+
+---
+
+## 🌱 Current Focus
+
+- AI Agents
+- SaaS Products
+- Automation
+- System Architecture
+- Scalable Backend Development
+
+---
+
+## 📊 GitHub Stats
+
+<!-- GitHub Stats Here -->
+
+---
+
+## 🌐 Connect
+
+🌍 Website: https://dreamlen.com
+
+💼 Agency: DreamLayers
+
+💼 LinkedIn: https://linkedin.com/in/anes-flah
+
+📧 anes.ben.flah@gmail.com
+📧 anasflah@dreamlen.com
+
+---
+
+> **Building digital products that help businesses grow.**
